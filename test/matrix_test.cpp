@@ -33,11 +33,20 @@ int main() {
                                    {7, 8, 7}};
     Matrix::Matrix<double> matrix2 = {{2.1, 1.2, 6.3},
                                       {2.2, 3.2, 5.7}};
+    Matrix::Matrix<int> matrix3;
+    Matrix::Matrix<int> matrix4(3, 6);
+    Matrix::Matrix<int> matrix5(5, 8, 1);
 
     std::cout << "matrix1:" << std::endl;
     std::cout << matrix1 << std::endl << std::endl;
     std::cout << "matrix2:" << std::endl;
     std::cout << matrix2 << std::endl << std::endl;
+    std::cout << "matrix3:" << std::endl;
+    std::cout << matrix3 << std::endl << std::endl;
+    std::cout << "matrix4:" << std::endl;
+    std::cout << matrix4 << std::endl << std::endl;
+    std::cout << "matrix5:" << std::endl;
+    std::cout << matrix5 << std::endl << std::endl;
 
     auto res6 = Matrix::identity<int>(3);
     auto res7 = static_cast<Matrix::Matrix<int>>(matrix2);
