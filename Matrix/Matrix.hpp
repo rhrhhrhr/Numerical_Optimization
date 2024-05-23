@@ -9,10 +9,10 @@
 #include <cstring>
 #include <iostream>
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Declaration
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 namespace Matrix {
-    /*
-     * Declaration
-     */
     template<typename T>
     class Matrix;
 
@@ -144,11 +144,13 @@ namespace Matrix {
             return this->operator*(1 / other);
         }
     };
+}
 
 
-    /*
-     * Implementation
-     */
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+* Implementation
+* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+namespace Matrix {
     template<typename T>
     std::ostream &operator<<(std::ostream &out, const Matrix<T> &matrix) {
         out << "{{";
