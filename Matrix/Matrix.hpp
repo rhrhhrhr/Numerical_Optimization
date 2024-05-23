@@ -169,7 +169,7 @@ namespace Matrix {
             }
 
             if (i != matrix.n_row - 1) {
-                out << '}' << std::endl;
+                out << "}\n";
             }
         }
 
