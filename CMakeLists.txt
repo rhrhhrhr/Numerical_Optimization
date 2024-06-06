@@ -6,4 +6,10 @@ set(CMAKE_CXX_STANDARD 17)
 add_executable(Numerical_Optimization main.cpp)
 
 add_executable(matrix_test test/matrix_test.cpp
-        Matrix/Matrix.hpp)
+        Matrix/Matrix.hpp
+)
+
+add_executable(model_test test/model_test.cpp
+        Matrix/Matrix.hpp
+        Model/Expression.hpp
+)

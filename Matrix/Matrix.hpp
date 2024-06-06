@@ -9,6 +9,8 @@
 #include <cstring>
 #include <iostream>
 
+#include "../Model/Expression.hpp"
+
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 * Declaration
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
@@ -36,7 +38,7 @@ namespace Matrix {
 
     template<typename T>
     class Matrix {
-        static_assert(std::is_arithmetic_v<T>, "Matrix data can only be numeric type values.");
+        static_assert(std::is_arithmetic_v<T> or Model::is_expression_v<T>, "Matrix data can only be numeric type values.");
 
         // 便于与不同数据类型的矩阵计算
         template<typename U>
@@ -59,14 +61,17 @@ namespace Matrix {
         size_t n_row, n_column, size, capacity;
         T *data;
 
+        // sub functions for function norm1()
         T vectorNorm1() const;
 
         T matrixNorm1() const;
 
+        // sub functions for function norm2()
         auto vectorNorm2() const;
 
         auto matrixNorm2() const;
 
+        // sub functions needed for function inverse()
         void rowExchange(size_t i, size_t j);
 
         template<typename U>
@@ -82,11 +87,14 @@ namespace Matrix {
 
         Matrix(size_t n_row, size_t n_column);
 
-        Matrix(size_t n_row, size_t n_column, T value);
+        template<typename U>
+        Matrix(size_t n_row, size_t n_column, U value);
 
-        Matrix(const std::initializer_list<T> &list);
+        template<typename U>
+        Matrix(const std::initializer_list<U> &list);
 
-        Matrix(const std::initializer_list<std::initializer_list<T>> &list);
+        template<typename U>
+        Matrix(const std::initializer_list<std::initializer_list<U>> &list);
 
         Matrix(const Matrix<T> &other);
 
@@ -335,7 +343,8 @@ namespace Matrix {
     }
 
     template<typename T>
-    Matrix<T>::Matrix(size_t n_row, size_t n_column, T value) : n_row(n_row), n_column(n_column) {
+    template<typename U>
+    Matrix<T>::Matrix(size_t n_row, size_t n_column, U value) : n_row(n_row), n_column(n_column) {
         size = n_row * n_column;
         capacity = size;
         data = new T[capacity];
@@ -346,7 +355,8 @@ namespace Matrix {
     }
 
     template<typename T>
-    Matrix<T>::Matrix(const std::initializer_list<T> &list) {
+    template<typename U>
+    Matrix<T>::Matrix(const std::initializer_list<U> &list) {
         n_row = list.size();
         n_column = 1;
         size = n_row;
@@ -361,7 +371,8 @@ namespace Matrix {
     }
 
     template<typename T>
-    Matrix<T>::Matrix(const std::initializer_list<std::initializer_list<T>> &list) {
+    template<typename U>
+    Matrix<T>::Matrix(const std::initializer_list<std::initializer_list<U>> &list) {
         n_row = list.size();
         n_column = list.begin()->size();
         size = n_row * n_column;
